@@ -8,14 +8,20 @@ import rootReducer from './reducers';
 
 //function logger(obj,next,action)
 //logger(obj)(next)(action)
-const logger = function({dispatch, getState}){
-  return function(next){
-    return function(action){
-      //middleware code
-      console.log('ACTION_TYPE = ',action.type);
-      next(action);  //to move to next middleware or to call dispatch again at end of last middleware
-    }
-  }
+// const logger = function({dispatch, getState}){
+//   return function(next){
+//     return function(action){
+//       //middleware code
+//       console.log('ACTION_TYPE = ',action.type);
+//       next(action);  //to move to next middleware or to call dispatch again at end of last middleware
+//     }
+//   }
+// }
+
+const logger =({dispatch,getState}) => (next) => (action) => {
+  //logger code
+       console.log('ACTION_TYPE = ',action.type);
+       next(action);  //to move to next middleware or to call dispatch again at end of last middleware
 }
 
 
