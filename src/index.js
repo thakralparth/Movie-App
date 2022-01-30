@@ -4,10 +4,10 @@ import {createStore} from 'redux';
 
 import './index.css';
 import App from './components/App';
-import movies from './reducers';
+import rootReducer from './reducers';
 
 
-const store = createStore(movies);  // movies is a reducer -> pure function
+const store = createStore(rootReducer);  // movies is a reducer -> pure function
 console.log('store',store);
 // console.log('BEFORE STATE',store.getState());   //initial state is defined in reducer function
 
