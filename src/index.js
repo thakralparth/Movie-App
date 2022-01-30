@@ -5,6 +5,7 @@ import {createStore,applyMiddleware} from 'redux';
 import './index.css';
 import App from './components/App';
 import rootReducer from './reducers';
+import thunk from 'redux-thunk';
 
 //function logger(obj,next,action)
 //logger(obj)(next)(action)
@@ -20,12 +21,26 @@ import rootReducer from './reducers';
 
 const logger =({dispatch,getState}) => (next) => (action) => {
   //logger code
-       console.log('ACTION_TYPE = ',action.type);
+    if(action.type !== 'function'){
+      console.log('ACTION_TYPE = ',action.type);
+    }
+       
        next(action);  //to move to next middleware or to call dispatch again at end of last middleware
 }
 
+// const thunk =({dispatch,getState}) => (next) => (action) => {
+//   //logger code
+//       if (typeof action === 'function'){
+//         action(dispatch);
+//         return;
+//       }
+//       next(action);
+// }
 
-const store = createStore(rootReducer,applyMiddleware(logger));  // movies is a reducer -> pure function
+//we also have inbuilt thunk in redux npm i redux-thunk
+
+
+const store = createStore(rootReducer,applyMiddleware(logger,thunk));  // movies is a reducer -> pure function
 console.log('store',store);
 // console.log('BEFORE STATE',store.getState());   //initial state is defined in reducer function
 
