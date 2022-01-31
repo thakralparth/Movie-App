@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import ReactDOM from 'react-dom';
 import {createStore,applyMiddleware} from 'redux';
 
@@ -6,6 +6,7 @@ import './index.css';
 import App from './components/App';
 import rootReducer from './reducers';
 import thunk from 'redux-thunk';
+// import AppWrapper from './components/App';
 
 //function logger(obj,next,action)
 //logger(obj)(next)(action)
@@ -42,6 +43,22 @@ const logger =({dispatch,getState}) => (next) => (action) => {
 
 const store = createStore(rootReducer,applyMiddleware(logger,thunk));  // movies is a reducer -> pure function
 console.log('store',store);
+
+export const StoreContext = createContext();
+
+console.log('StoreContext',StoreContext);
+
+// class Provider extends React.Component{
+//   render(){
+//     const { store } =this.props;
+//     // console.log('st',store);
+//     return(
+//       <StoreContext.Provider value={store}>
+//           {this.props.children}
+//       </StoreContext.Provider>
+//     )
+//   }
+// }
 // console.log('BEFORE STATE',store.getState());   //initial state is defined in reducer function
 
 // store.dispatch({
@@ -51,11 +68,21 @@ console.log('store',store);
 
 // console.log('AFTER STATE',store.getState()); 
 
+
+
 ReactDOM.render(
-  <React.StrictMode>
+  <StoreContext.Provider value={store}>
     <App store={store}/>
-  </React.StrictMode>,
+  </StoreContext.Provider>,
   document.getElementById('root')
 );
+
+// ReactDOM.render(
+  
+//   <Provider value={store}>
+//     <App />
+//   </Provider>,
+//   document.getElementById('root')
+// );
 
 
