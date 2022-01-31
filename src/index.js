@@ -1,4 +1,5 @@
 import React, { createContext } from 'react';
+import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
 import {createStore,applyMiddleware} from 'redux';
 
@@ -44,7 +45,7 @@ const logger =({dispatch,getState}) => (next) => (action) => {
 const store = createStore(rootReducer,applyMiddleware(logger,thunk));  // movies is a reducer -> pure function
 console.log('store',store);
 
-export const StoreContext = createContext();
+export const StoreContext = createContext(store);
 
 console.log('StoreContext',StoreContext);
 
@@ -70,19 +71,19 @@ console.log('StoreContext',StoreContext);
 
 
 
-ReactDOM.render(
-  <StoreContext.Provider value={store}>
-    <App store={store}/>
-  </StoreContext.Provider>,
-  document.getElementById('root')
-);
-
 // ReactDOM.render(
-  
-//   <Provider value={store}>
-//     <App />
-//   </Provider>,
+//   <StoreContext.Provider value={store}>
+//     <App store={store}/>
+//   </StoreContext.Provider>,
 //   document.getElementById('root')
 // );
+
+ReactDOM.render(
+  
+  <Provider store={store}>
+    <App store={store} />
+  </Provider>,
+  document.getElementById('root')
+);
 
 
