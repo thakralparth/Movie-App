@@ -26,6 +26,8 @@ body {
   padding: 0 10px;
   box-sizing: border-box;
 }
+
+
 .search-container {
   position: relative;
 }
@@ -87,7 +89,7 @@ body {
   border-bottom-right-radius: 4px;
   border-top-right-radius: 4px;
   position: relative;
-  top: -1px;
+  top: 1px;
 }
 .main {
   width: 70%;
@@ -122,7 +124,11 @@ body {
   border-radius: 3px;
   box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #f1f1f1;
   display: flex;
+  /* flex-direction: column; */
 }
+/* .left .right{
+  flex-direction: column;
+} */
 .movie-card:not(:first-child) {
   margin-top: 20px;
 }
@@ -131,6 +137,7 @@ body {
 }
 .movie-card .left {
   flex: 1;
+  /* flex-direction: column; */
 }
 .movie-card .left img {
   height: 250px;
@@ -138,6 +145,8 @@ body {
 .movie-card .right {
   position: relative;
   flex: 10;
+  
+  /* flex-direction: column; */
 }
 .movie-card .title {
   padding: 10px 20px;
@@ -182,4 +191,35 @@ body {
   padding: 20px 0;
   font-size: 20px;
   color: #6d6d6d;
+}
+
+
+@media only screen and (max-width:700px){
+  .search-container input{
+    width: 300px;
+  }
+  .movie-card{
+    flex-direction: column;
+  }
+  .movie-card .right{
+    /* position: relative; */
+    display: flex;
+    flex-direction: column;
+    /* flex-direction: column-reverse; */
+    /* top:10px; */
+  }
+  .movie-card .right .title{
+    margin:auto;
+  }
+  .movie-card .footer{
+    position: relative;
+  }
+  .movie-card .left{
+    margin:auto
+  }
+  .movie-card .left img{
+    width:250px;
+    /* margin-left: 130px; */
+  }
+
 }
